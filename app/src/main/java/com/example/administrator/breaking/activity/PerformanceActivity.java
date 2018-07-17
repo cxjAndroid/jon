@@ -4,15 +4,18 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.example.administrator.breaking.R;
+import com.example.jon.jon.R;
 
 import butterknife.BindView;
 
+/**
+ * @author jon
+ * @since 6/25/18
+ */
 public class PerformanceActivity extends BaseActivity {
 
-
-    @BindView(R.id.text_heap)
-    TextView HeapText;
+    @BindView(R.id.heap_text)
+    TextView heapText;
 
     @Override
     public int getContentViewLayoutID() {
@@ -21,18 +24,12 @@ public class PerformanceActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
     }
 
     @Override
     public void initData() {
-        ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-        int heapSize = 0;
-        try {
-            heapSize = manager.getMemoryClass();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        HeapText.setText("heapSize="+heapSize);
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        int heapSize = manager.getMemoryClass();
+        heapText.setText("heapSize=" + heapSize);
     }
 }

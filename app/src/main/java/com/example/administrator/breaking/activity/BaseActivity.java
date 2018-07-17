@@ -11,9 +11,7 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-
     public boolean isNeedBindButterKnife = true;
-
 
     //private Object subscriber;
     @Override
@@ -35,7 +33,23 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+
     public abstract void initData();
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
 
 }
