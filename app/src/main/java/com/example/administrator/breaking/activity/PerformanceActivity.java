@@ -2,11 +2,14 @@ package com.example.administrator.breaking.activity;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.view.View;
 import android.widget.TextView;
 
-import com.example.jon.jon.R;
+
+import com.example.administrator.breaking.R;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author jon
@@ -31,5 +34,14 @@ public class PerformanceActivity extends BaseActivity {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         int heapSize = manager.getMemoryClass();
         heapText.setText("heapSize=" + heapSize);
+    }
+
+    @OnClick({R.id.btn})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn:
+                heapText.scrollTo(100, 0);
+                break;
+        }
     }
 }

@@ -1,6 +1,11 @@
 package com.example.administrator.breaking.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,26 +39,84 @@ public class GlideActivity extends BaseActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        LogUtils.e("onSaveInstanceState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        LogUtils.e("onRestoreInstanceState");
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LogUtils.e("onCreate");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        LogUtils.e("onRestart");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtils.e("onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.e("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtils.e("onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtils.e("onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.e("onDestroy");
+    }
+
+    @Override
     public void initData() {
         int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024 / 1024);
         LogUtils.e("Max memory is " + maxMemory + "MB");
         Glide.with(this).load(R.drawable.picture_shijue_92).into(imageView);
-
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GlideActivity.this, GlideActivity.class));
+            }
+        });
     }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        /*final BitmapFactory.Options options1 = new BitmapFactory.Options();
+        final BitmapFactory.Options options1 = new BitmapFactory.Options();
         Bitmap bitmapBefore = BitmapFactory.decodeResource(getResources(),
-                                                           R.drawable.picture_shijue_92, options1);
-
+                R.drawable.picture_shijue_92, options1);
 
         textByteBefore.setText(
-                "bitmapBefore----" + bitmapBefore.getByteCount() / 1024 / 1024 + "MB");*/
+                "bitmapBefore----" + bitmapBefore.getByteCount() / 1024 / 1024 + "MB");
 
-
-        /*final BitmapFactory.Options options = new BitmapFactory.Options();
+        final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(getResources(), R.drawable.picture_shijue_92, options);
         // 调用上面定义的方法计算inSampleSize值
@@ -66,10 +129,11 @@ public class GlideActivity extends BaseActivity {
         // 使用获取到的inSampleSize值再次解析图片
         options.inJustDecodeBounds = false;
         Bitmap bitmapAfter = BitmapFactory.decodeResource(getResources(),
-                                                          R.drawable.picture_shijue_92, options);
+                R.drawable.picture_shijue_92, options);
+
         textByteAfter.setText("bitmapAfter----" + bitmapAfter.getByteCount() / 1024 / 1024 + "MB");
 
-        imageView.setImageBitmap(bitmapAfter);*/
+        imageView.setImageBitmap(bitmapAfter);
     }
 
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth,
